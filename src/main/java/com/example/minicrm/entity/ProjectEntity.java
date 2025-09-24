@@ -1,5 +1,6 @@
 package com.example.minicrm.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -25,6 +26,7 @@ public class ProjectEntity {
     @JoinColumn(name = "owner_id")
     private UserEntity owner;
 
+    @JsonManagedReference
     @OneToMany(mappedBy = "project", cascade = CascadeType.ALL)
     private List<TaskEntity> tasks;
 

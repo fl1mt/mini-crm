@@ -1,5 +1,6 @@
 package com.example.minicrm.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -21,6 +22,7 @@ public class TaskEntity {
     @Enumerated(EnumType.STRING)
     private TaskStatus status; // NEW, IN_PROGRESS, DONE
 
+    @JsonBackReference
     @ManyToOne
     @JoinColumn(name = "project_id")
     private ProjectEntity project;
