@@ -1,7 +1,9 @@
 package com.example.minicrm.controller;
 
+import com.example.minicrm.dto.RegisterRequest;
 import com.example.minicrm.entity.UserEntity;
 import com.example.minicrm.service.UserService;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -22,7 +24,9 @@ public class UserController {
     }
 
     @PostMapping("/register")
-    public UserEntity registerUser(@RequestBody UserEntity user) {
-        return userService.register(user);
+    public ResponseEntity<?> register(@RequestBody RegisterRequest request) {
+        userService.register(request);
+        return ResponseEntity.ok("User registered");
     }
+
 }

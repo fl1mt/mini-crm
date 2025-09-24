@@ -26,11 +26,6 @@ public class AuthController {
         this.jwtUtil = jwtUtil;
     }
 
-    @PostMapping("/register")
-    public ResponseEntity<UserEntity> register(@RequestBody UserEntity user) {
-        return ResponseEntity.ok(userService.register(user));
-    }
-
     @PostMapping("/login")
     public ResponseEntity<AuthResponse> login(@RequestBody AuthRequest request) {
         try {
