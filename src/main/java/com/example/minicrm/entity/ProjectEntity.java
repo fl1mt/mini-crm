@@ -41,6 +41,10 @@ public class ProjectEntity {
         return owner;
     }
 
+    public List<TaskEntity> getTasks() {
+        return tasks;
+    }
+
     public void setName(String name){
         this.name = name;
     }
