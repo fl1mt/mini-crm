@@ -51,22 +51,16 @@ public class TaskService {
 
         TaskEntity saved = taskRepository.save(task);
 
-        return new TaskResponse(
-                saved.getId(),
-                saved.getTitle(),
-                saved.getDescription(),
-                saved.getStatus(),
-                saved.getProject().getId(),
-                saved.getCreatedBy().getEmail(),
-                saved.getAssignee() != null ? saved.getAssignee().getEmail() : null
-        );
+        return TaskResponse.fromEntity(saved);
     }
 
-
-
-    public List<TaskEntity> getTasksByProject(Long projectId) {
-        return taskRepository.findByProjectId(projectId);
+    public List<TaskResponse> getTasksByProject(Long projectId) {
+        return taskRepository.findByProjectId(projectId)
+                .stream()
+                .map(TaskResponse::fromEntity)
+                .toList();
     }
+
 
     public TaskEntity updateTaskStatus(Long taskId, TaskStatus status) {
         TaskEntity task = taskRepository.findById(taskId)

@@ -26,7 +26,6 @@ public class ProjectEntity {
     @JoinColumn(name = "owner_id")
     private UserEntity owner;
 
-    @JsonManagedReference
     @OneToMany(mappedBy = "project", cascade = CascadeType.ALL)
     private List<TaskEntity> tasks;
 

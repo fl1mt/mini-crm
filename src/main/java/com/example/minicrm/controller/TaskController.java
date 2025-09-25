@@ -34,9 +34,10 @@ public class TaskController {
 
 
     @GetMapping("/project/{projectId}")
-    public ResponseEntity<List<TaskEntity>> getTasksByProject(@PathVariable Long projectId) {
+    public ResponseEntity<List<TaskResponse>> getTasksByProject(@PathVariable Long projectId) {
         return ResponseEntity.ok(taskService.getTasksByProject(projectId));
     }
+
 
     @PutMapping("/{taskId}/status")
     public ResponseEntity<TaskEntity> updateTaskStatus(@PathVariable Long taskId,
