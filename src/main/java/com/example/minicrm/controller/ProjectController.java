@@ -1,4 +1,5 @@
 package com.example.minicrm.controller;
+import com.example.minicrm.dto.ProjectResponse;
 import com.example.minicrm.entity.UserEntity;
 
 import com.example.minicrm.entity.ProjectEntity;
@@ -24,16 +25,23 @@ public class ProjectController {
     }
 
     @GetMapping
-    public ResponseEntity<List<ProjectEntity>> getAllProjects() {
-        return ResponseEntity.ok(projectService.getAllProjects());
+    public ResponseEntity<List<ProjectResponse>> getAllProjects() {
+        return ResponseEntity.ok(
+                projectService.getAllProjects()
+                        .stream()
+                        .map(ProjectResponse::fromEntity)
+                        .toList()
+        );
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<ProjectEntity> getProjectById(@PathVariable Long id) {
+    public ResponseEntity<ProjectResponse> getProjectById(@PathVariable Long id) {
         return projectService.getProjectById(id)
+                .map(ProjectResponse::fromEntity)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
+
 
 
     @PostMapping
