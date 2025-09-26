@@ -11,10 +11,10 @@ public class ProjectResponse {
     private Long id;
     private String name;
     private String description;
-    private String owner;
+    private UserEntity owner;
     private List<TaskShortDTO> tasks;
 
-    public ProjectResponse(Long id, String name, String description, String owner, List<TaskShortDTO> tasks) {
+    public ProjectResponse(Long id, String name, UserEntity owner, String description, List<TaskShortDTO> tasks) {
         this.id = id;
         this.name = name;
         this.tasks = tasks;
@@ -26,7 +26,7 @@ public class ProjectResponse {
         return new ProjectResponse(
                 project.getId(),
                 project.getName(),
-                project.getEmailOwner(),
+                project.getOwner(),
                 project.getDescription(),
                 project.getTasks() != null
                         ? project.getTasks().stream()
@@ -42,6 +42,13 @@ public class ProjectResponse {
 
     public String getName() {
         return name;
+    }
+    public String getDescription(){
+        return description;
+    }
+
+    public UserEntity getOwner(){
+        return owner;
     }
 
     public List<TaskShortDTO> getTasks() {
