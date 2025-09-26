@@ -2,6 +2,7 @@ package com.example.minicrm.dto;
 
 import com.example.minicrm.entity.ProjectEntity;
 import com.example.minicrm.entity.TaskEntity;
+import com.example.minicrm.entity.UserEntity;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -9,18 +10,24 @@ import java.util.stream.Collectors;
 public class ProjectResponse {
     private Long id;
     private String name;
+    private String description;
+    private String owner;
     private List<TaskShortDTO> tasks;
 
-    public ProjectResponse(Long id, String name, List<TaskShortDTO> tasks) {
+    public ProjectResponse(Long id, String name, String description, String owner, List<TaskShortDTO> tasks) {
         this.id = id;
         this.name = name;
         this.tasks = tasks;
+        this.owner = owner;
+        this.description = description;
     }
 
     public static ProjectResponse fromEntity(ProjectEntity project) {
         return new ProjectResponse(
                 project.getId(),
                 project.getName(),
+                project.getEmailOwner(),
+                project.getDescription(),
                 project.getTasks() != null
                         ? project.getTasks().stream()
                         .map(TaskShortDTO::fromEntity)

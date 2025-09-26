@@ -40,6 +40,9 @@ public class ProjectEntity {
     public UserEntity getOwner(){
         return owner;
     }
+    public String getEmailOwner(){
+        return owner.getEmail();
+    }
 
     public List<TaskEntity> getTasks() {
         return tasks;
